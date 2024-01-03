@@ -1,0 +1,84 @@
+/* src/Signup.css */
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #292929; /* Set your desired background color */
+  }
+  
+  .signup-card {
+    color: #fe6601;
+    background-color: #292929; /* Card background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 400px; /* Adjust the width as needed */
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+
+  .signup-card:hover {
+    background-color: #f0f0f0; /* New background color on hover */
+    box-shadow: 2px 4px 8px #fe6601; /* New shadow on hover */
+  }
+  
+  .signup-card h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input:focus {
+    color: #fe6601;
+    border-color: #fe6601; /* New border color when the input is focused */
+  }
+
+/* Add this CSS to your Signup.css file */
+.gender-radio {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .gender-radio div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .gender-radio input {
+    margin-right: 5px;
+  }
+  
+
+  button {
+    background-color: #292929; /* Button background color */
+    color: #fe6601;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    color: #292929;
+    background-color: #fe6601; /* Button background color on hover */
+  }
+  

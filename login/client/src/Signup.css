@@ -1,0 +1,119 @@
+.signup-card {
+  color: #fe6601;
+  background-color: #292929;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.signup-card:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.signup-card h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%; /* Adjusted width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  color: #fe6601;
+  border-color: #fe6601;
+}
+
+/* Updated gender-radio styles */
+.gender-radio div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align to the left */
+  margin-bottom: 10px;
+}
+
+.gender-radio input {
+  margin-right: 5px; /* Adjusted margin */
+  width: 20px; /* Set a fixed width to make it square */
+  height: 20px; /* Set a fixed height to make it square */
+}
+
+/* Align the labels and options horizontally */
+.gender-radio label {
+  margin-left: 5px; /* Adjusted margin */
+}
+
+button {
+  background-color: #292929;
+  color: #fe6601;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  color: #292929;
+  background-color: #fe6601;
+}
+
+.login-link {
+  margin-top: 20px;
+  text-align: right;
+  color: #fe6601;
+}
+
+.login-link a {
+  text-decoration: none;
+  font-weight: bold;
+  color: inherit; /* Inherit the color from the parent */
+}
+
+/* Black, grey, white warp animation */
+@keyframes blackGreyWhiteWarp {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add animation to the signup page */
+.signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #000000, #808080, #ffffff);
+  background-size: 400% 400%;
+  animation: blackGreyWhiteWarp 15s infinite;
+}

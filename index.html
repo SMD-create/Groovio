@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Song Management</title>
+</head>
+<body>
+  <h1>Song Management</h1>
+
+  <!-- Upload Song Form -->
+  <form action="http://localhost:3001/storeSong" method="post" enctype="multipart/form-data">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br>
+    <br>
+    <label for="artist">Artist:</label>
+    <input type="text" id="artist" name="artist" required><br>
+    <br>
+    <label for="audioFile">Audio File:</label>
+    <input type="file" id="audioFile" name="audioFile" accept=".mp3" required><br>
+    <br>
+    <button type="submit">Upload Song</button>
+    <br>
+  </form>
+
+  <!-- Play Song Form -->
+  <form id="songForm">
+    <br>
+    <label for="songName">Select Song:</label>
+    <select id="songName" name="songName" required></select>
+    <button type="button" onclick="playSelectedSong()">Play</button>
+    <br>
+  </form>
+
+  <!-- Audio Player -->
+  <br>
+  <audio controls id="audioPlayer">
+    <source id="audioSource" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <br>
+
+  <!-- Playlist Form -->
+  <br>
+  <form id="playlistForm">
+    <label for="playlistName">Playlist Name:</label>
+    <input type="text" id="playlistName" name="playlistName" required>
+    <button type="button" onclick="createPlaylist()">Create Playlist</button>
+    <button type="button" onclick="sharePlaylist()">Share Playlist</button>
+    <br>
+
+    <br>
+    <label for="playlistSelect">Select Playlist:</label>
+    <select id="playlistSelect" name="playlistSelect" required></select>
+    <button type="button" onclick="displayPlaylistSongs()">Display Playlist Songs</button>
+    <br>
+  </form>
+
+  <form>
+    <br>
+  <!-- New section to add song to playlist -->
+  <label for="addSongToPlaylist">Select Song to Add:</label>
+  <select id="addSongToPlaylist" name="addSongToPlaylist" required></select>
+  <button type="button" onclick="addSongToSelectedPlaylist()">Add Song to Playlist</button>
+  <br>
+  </form>
+
+
+
+  <script>
+    // Fetch the list of songs, playlists, and songs to add to playlist when the page loads
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Fetch songs and populate the dropdown
+      const songResponse = await fetch('http://localhost:3001/getSongs');
+      const songData = await songResponse.json();
+
+      if (songData.success) {
+        const songSelect = document.getElementById('songName');
+
+        // Populate the dropdown with song names
+        songData.songs.forEach(song => {
+          const option = document.createElement('option');
+          option.value = song._id;
+          option.text = `${song.title} by ${song.artist}`;
+          songSelect.add(option);
+        });
+      } else {
+        alert('Failed to fetch songs');
+      }
+
+      // Fetch playlists and populate the dropdown
+      const playlistResponse = await fetch('http://localhost:3001/getPlaylists');
+      const playlistData = await playlistResponse.json();
+
+      if (playlistData.success) {
+        const playlistSelect = document.getElementById('playlistSelect');
+
+        // Populate the dropdown with playlist names
+        playlistData.playlists.forEach(playlist => {
+          const option = document.createElement('option');
+          option.value = playlist._id; // Assuming playlist has an _id field
+          option.text = playlist.name;
+          playlistSelect.add(option);
+        });
+      } else {
+        alert('Failed to fetch playlists');
+      }
+
+      // Fetch songs to add to playlist and populate the dropdown
+      const songsToAddResponse = await fetch('http://localhost:3001/getSongsToAddToPlaylist');
+      const songsToAddData = await songsToAddResponse.json();
+
+      if (songsToAddData.success) {
+        const addSongToPlaylistSelect = document.getElementById('addSongToPlaylist');
+
+        // Populate the dropdown with songs to add to playlist
+        /*songsToAddData.songsToAdd.forEach(song => {
+          const option = document.createElement('option');
+          option.value = song._id;
+          option.text = `${song.title} by ${song.artist}`;
+          addSongToPlaylistSelect.add(option);
+        
+        });*/
+        songData.songs.forEach(song => {
+          const option = document.createElement('option');
+          option.value = song._id;
+          option.text = `${song.title} by ${song.artist}`;
+          addSongToPlaylistSelect.add(option);
+        });
+      } else {
+        alert('Failed to fetch songs to add to playlist');
+      }
+    });
+
+    // Fetch the list of songs and playlists when the page loads
+document.addEventListener('DOMContentLoaded', async () => {
+  // ... (existing code)
+
+  // Fetch songs to add to playlist and populate the dropdown
+  const songsToAddResponse = await fetch('http://localhost:3001/getSongsToAddToPlaylist');
+  const songsToAddData = await songsToAddResponse.json();
+
+  if (songsToAddData.success) {
+    const addSongToPlaylistSelect = document.getElementById('addSongToPlaylist');
+
+    // Populate the dropdown with songs to add to playlist
+    /*songsToAddData.songsToAdd.forEach(song => {
+      const option = document.createElement('option');
+      option.value = song._id;
+      option.text = `${song.title} by ${song.artist}`;
+      addSongToPlaylistSelect.add(option);
+    });*/
+
+    songData.songs.forEach(song => {
+          const option = document.createElement('option');
+          option.value = song._id;
+          option.text = `${song.title} by ${song.artist}`;
+          addSongToPlaylistSelect.add(option);
+    });
+  } else {
+    alert('Failed to fetch songs to add to playlist');
+  }
+
+  // Fetch playlists and populate the dropdown for selecting a playlist
+  const playlistSelect = document.getElementById('playlistSelect');
+  const playlistsResponse = await fetch('http://localhost:3001/getPlaylists');
+  const playlistsData = await playlistsResponse.json();
+
+  if (playlistsData.success) {
+    // Populate the dropdown with playlist names
+    playlistsData.playlists.forEach(playlist => {
+      const option = document.createElement('option');
+      option.value = playlist._id;
+      option.text = playlist.name;
+      playlistSelect.add(option);
+    });
+  } else {
+    alert('Failed to fetch playlists');
+  }
+
+  // Add an event listener to the playlistSelect to fetch songs when a playlist is chosen
+  playlistSelect.addEventListener('change', async () => {
+    const selectedPlaylistId = playlistSelect.value;
+
+    // Fetch songs of the selected playlist
+    const playlistSongsResponse = await fetch(`http://localhost:3001/getPlaylistSongs/${selectedPlaylistId}`);
+    const playlistSongsData = await playlistSongsResponse.json();
+
+    if (playlistSongsData.success) {
+      const playlistSongSelect = document.getElementById('playlistSongSelect');
+
+      // Clear existing options
+      playlistSongSelect.innerHTML = "";
+
+      // Populate the dropdown with song names from the selected playlist
+      playlistSongsData.songs.forEach(song => {
+        const option = document.createElement('option');
+        option.value = song._id;
+        option.text = `${song.title} by ${song.artist}`;
+        playlistSongSelect.add(option);
+      });
+    } else {
+      alert('Failed to fetch songs for the selected playlist');
+    }
+  });
+});
+
+
+    // Function to create a playlist
+    async function createPlaylist() {
+      const playlistName = document.getElementById('playlistName').value;
+      const response = await fetch('http://localhost:3001/createPlaylist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: playlistName }),
+      });
+
+      if (response.ok) {
+        alert('Playlist created successfully');
+      } else {
+        alert('Failed to create playlist');
+      }
+    }
+
+    // Function to play the selected song from the playlist
+async function playSelectedPlaylistSong() {
+  try {
+    const playlistId = document.getElementById('playlistSelect').value;
+    const songId = document.getElementById('songName').value;
+
+    const response = await fetch(`http://localhost:3001/getPlaylistSong/${playlistId}/${songId}`);
+    const data = await response.blob();
+
+    if (response.ok) {
+      const audioPlayer = document.getElementById('audioPlayer');
+      const audioSource = document.getElementById('audioSource');
+
+      audioSource.src = URL.createObjectURL(data);
+      audioPlayer.load();
+      audioPlayer.play();
+    } else {
+      const data = await response.json();
+      alert(`Failed to play the selected song: ${data.error}`);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while playing the selected song');
+  }
+}
+
+// Function to display songs of the selected playlist
+async function displayPlaylistSongs() {
+  const playlistId = document.getElementById('playlistSelect').value;
+  const response = await fetch(`http://localhost:3001/getPlaylistSongs/${playlistId}`);
+  const data = await response.json();
+
+  if (data.success) {
+    const songSelect = document.getElementById('songName');
+    
+    // Clear existing options
+    songSelect.innerHTML = "";
+
+    // Populate the dropdown with song names
+    data.songs.forEach(song => {
+      const option = document.createElement('option');
+      option.value = song._id;
+      option.text = `${song.title} by ${song.artist}`;
+      songSelect.add(option);
+    });
+  } else {
+    alert('Failed to fetch songs for the selected playlist');
+  }
+}
+
+// Function to add a song to a playlist
+async function addSongToPlaylist() {
+  const playlistId = document.getElementById('playlistSelect').value;
+  const songIdToAdd = document.getElementById('addSongToPlaylist').value;
+
+  const response = await fetch(`http://localhost:3001/addSongToPlaylist/${playlistId}/${songIdToAdd}`, {
+    method: 'POST',
+  });
+
+  if (response.ok) {
+    alert('Song added to playlist successfully');
+  } else {
+    alert('Failed to add song to playlist');
+  }
+}
+    // Function to display songs of the selected playlist
+    async function displayPlaylistSongs() {
+      const playlistId = document.getElementById('playlistSelect').value;
+      const response = await fetch(`http://localhost:3001/getPlaylistSongs/${playlistId}`);
+      const data = await response.json();
+
+      if (data.success) {
+        const songSelect = document.getElementById('songName');
+        
+        // Clear existing options
+        songSelect.innerHTML = "";
+
+        // Populate the dropdown with song names
+        data.songs.forEach(song => {
+          const option = document.createElement('option');
+          option.value = song._id;
+          option.text = `${song.title} by ${song.artist}`;
+          songSelect.add(option);
+        });
+      } else {
+        alert('Failed to fetch songs for the selected playlist');
+      }
+    }
+
+    // Function to play the selected song
+    async function playSelectedSong() {
+      const songId = document.getElementById('songName').value;
+      const response = await fetch(`http://localhost:3001/playSong/${songId}`);
+      const data = await response.blob();
+
+      if (response.ok) {
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioSource = document.getElementById('audioSource');
+
+        audioSource.src = URL.createObjectURL(data);
+        audioPlayer.load();
+        audioPlayer.play();
+      } else {
+        alert('Failed to play the selected song');
+      }
+    }
+
+    // Function to add a song to a selected playlist
+async function addSongToSelectedPlaylist() {
+  try {
+    const playlistId = document.getElementById('playlistSelect').value;
+    const songIdToAdd = document.getElementById('addSongToPlaylist').value;
+
+    const response = await fetch(`http://localhost:3001/addSongToPlaylist/${playlistId}/${songIdToAdd}`, {
+      method: 'POST',
+    
+    });
+    const data = await response.blob();
+
+    if (response.ok) {
+      const audioSource = document.getElementById('audioSource');
+
+      audioSource.src = URL.createObjectURL(data);
+      alert('Song added to playlist successfully');
+    } else {
+      const data = await response.json();
+      alert(`Failed to add song to playlist: ${data.error}`);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while adding the song to the playlist');
+  }
+}
+
+// Function to share a playlist
+async function sharePlaylist() {
+  const playlistId = document.getElementById('playlistSelect').value;
+  const sharedWithEmail = prompt('Enter the email to share this playlist with:');
+
+  if (sharedWithEmail) {
+    try {
+      const response = await fetch(`http://localhost:3001/sharePlaylist/${playlistId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userEmail: sharedWithEmail }),
+      });
+
+      if (response.ok) {
+        alert('Playlist shared successfully');
+      } else {
+        const data = await response.json();
+        alert(`Failed to share playlist: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while sharing the playlist');
+    }
+  }
+}
+
+  </script>
+</body>
+</html>

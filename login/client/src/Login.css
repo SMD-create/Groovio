@@ -1,0 +1,93 @@
+
+
+/* Card styles */
+.login-card {
+  color: #fe6601;
+  background-color: #292929;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  text-align: center;
+}
+
+.login-card:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+}
+
+/* Input styles */
+input {
+  color: #fe6601;
+  width: 80%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+input:focus {
+  border-color: #fe6601;
+}
+
+/* Button styles */
+button {
+  width: 50%;
+  padding: 10px;
+  background-color: #292929;
+  color: #fe6601;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  color: #292929;
+  background-color: #fe6601;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .login-card {
+    width: 80%;
+  }
+
+  button {
+    width: 70%;
+  }
+}
+
+/* Rainbow warp animation */
+@keyframes rainbowWarp {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add animation to the container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: linear-gradient(45deg, #ff8c00, #ffffff, #ffd700, #ff0000);
+  background-size: 400% 400%;
+  animation: rainbowWarp 15s infinite;}

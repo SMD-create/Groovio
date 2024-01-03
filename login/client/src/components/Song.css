@@ -1,0 +1,67 @@
+/* Song.css */
+
+/*.song-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }*/
+  
+  .song-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .song-artist {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  
+  .song-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .song-controls {
+    display: flex;
+    gap: 16px;
+  }
+
+  .song-page {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    background-color: #f8f9fa;
+  }
+  
+  
+ /* .home-section {
+    flex: 1;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }*/
+  
+  .songs-section {
+    flex: 1;
+    max-width: 400px; /* Adjust as needed */
+    margin: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Add more styles as needed for your Song component */
+  

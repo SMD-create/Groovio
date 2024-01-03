@@ -1,0 +1,99 @@
+/* AudioPlayer.css */
+
+/* Overall styling for the audio player */
+#audioPlayer {
+  width: 50%;
+  background-color:#fe6601; /* Dark background color */
+  padding: 10px;
+  margin-top: 10px;
+  left:50%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* Styling for the audio controls */
+#audioPlayer controls {
+  background-color: #971b1b; /* Darker background for controls */
+  border: none;
+}
+
+/* Styling for play/pause button */
+#audioPlayer controls button {
+  background-color: #fe6601; /* Orange play/pause button */
+  color: #fe6601;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 3px; /* Rounded corners */
+  transition: background-color 0.3s ease;
+}
+
+/* Play/pause button on hover */
+#audioPlayer controls button:hover {
+  background-color: #ff7f00; /* Lighter orange on hover */
+}
+
+/* Styling for volume and progress sliders */
+#audioPlayer controls input[type="range"] {
+  background-color: #ac3a3a; /* Darker background for sliders */
+  height: 5px;
+  margin: 0;
+}
+
+/* Styling for volume slider thumb (WebKit browsers) */
+#audioPlayer controls input[type="range"]::-webkit-slider-thumb {
+  background-color: #fe6601; /* Orange thumb for WebKit browsers */
+}
+
+/* Styling for volume slider thumb (Mozilla Firefox) */
+#audioPlayer controls input[type="range"]::-moz-range-thumb {
+  background-color: #fe6601; /* Orange thumb for Mozilla Firefox */
+}
+
+/* Slider thumb on hover (WebKit browsers) */
+#audioPlayer controls input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: #ff7f00; /* Lighter orange on hover for WebKit browsers */
+}
+
+/* Slider thumb on hover (Mozilla Firefox) */
+#audioPlayer controls input[type="range"]::-moz-range-thumb:hover {
+  background-color: #ff7f00; /* Lighter orange on hover for Mozilla Firefox */
+}
+
+/* Styling for time display */
+#audioPlayer controls div {
+  color: #fff;
+  font-size: 14px;
+  margin: 5px;
+}
+
+/* Styling for volume and mute icons */
+#audioPlayer controls [data-mute="false"]::before,
+#audioPlayer controls [data-mute="true"]::before {
+  content: '\1F50A'; /* Unicode loudspeaker icon */
+  font-size: 18px;
+  color: #fff;
+}
+
+/* Styling for the mute icon */
+#audioPlayer controls [data-mute="true"]::before {
+  content: '\1F507'; /* Unicode muted speaker icon */
+}
+
+/* Styling for the progress bar */
+#audioPlayer controls progress {
+  background-color: #bc8181; /* Darker background for progress bar */
+  height: 10px;
+  margin: 5px 0;
+}
+
+/* Styling for the progress bar filled part (WebKit browsers) */
+#audioPlayer controls progress::-webkit-progress-value {
+  background-color: #fe6601; /* Orange filled part for WebKit browsers */
+}
+
+/* Styling for the progress bar filled part (Mozilla Firefox) */
+#audioPlayer controls progress::-moz-progress-bar {
+  background-color: #fe6601; /* Orange filled part for Mozilla Firefox */
+}

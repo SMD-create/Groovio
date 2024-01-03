@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  #song-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    z-index: 1; 
+  }
+  
+  .song-card {
+    background-color: #fe6601;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 200px;
+  }
+  
+  .song-card img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .song-card p {
+    margin: 8px 0;
+  }
+  

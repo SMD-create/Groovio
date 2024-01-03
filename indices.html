@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Song</title>
+</head>
+<body>
+  <h1>Play Song</h1>
+  
+  <div id="songList">
+    <h2>Song List</h2>
+    <ul id="list">
+      <!-- Song list will be dynamically populated here -->
+    </ul>
+  </div>
+
+  <audio controls>
+    <source id="audioSource" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    async function fetchSongList() {
+      const response = await fetch('http://localhost:3002/songList');
+      const data = await response.json();
+
+      if (data.success) {
+        const listElement = document.getElementById('list');
+
+        // Populate the song list dynamically
+        data.songs.forEach(song => {
+          const listItem = document.createElement('li');
+          listItem.textContent = song.title + ' by ' + song.artist;
+          listItem.addEventListener('click', () => playSong(song._id));
+          listElement.appendChild(listItem);
+        });
+      } else {
+        alert('Failed to fetch song list!');
+      }
+    }
+
+    async function playSong(songId) {
+      const response = await fetch(`http://localhost:3002/playSong/${songId}`);
+      const data = await response.json();
+
+      if (data.success) {
+        const audioSource = document.getElementById('audioSource');
+        audioSource.src = data.audioUrl;
+      } else {
+        alert('Failed to play the song!');
+      }
+    }
+
+    // Fetch the song list when the page loads
+    window.onload = fetchSongList;
+  </script>
+</body>
+</html>
